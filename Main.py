@@ -1,7 +1,7 @@
 from my_functions import *
 from Model import User
 while True:
-	print("Choose an option\n1.Login\n2.Register\n3.View Balance\n4.Add Money\n5.Withdraw\n")
+	print("Choose an option\n1.Login\n2.Register\n3.View Balance\n4.Add Money\n5.Withdraw\n6.Send Money")
 	choice=int(input("--> "))
 	if choice==1:
 		user=login()
@@ -26,6 +26,10 @@ while True:
 	elif choice==5:
 		user=login()
 		withdraw(user)
+	elif choice==6:
+		user=login()
+		send_money(user)
+
 	else:
 		exit()
 

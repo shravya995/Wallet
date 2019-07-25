@@ -46,6 +46,27 @@ def withdraw(user):
 		bal=bal-money
 		query = Wallet.update(balance=bal).where(Wallet.customer_id==user)
 		n = query.execute()
+def send_money(user):
+	money=float(input("Enter the amount to be sent--->"))
+	user1=Wallet.select().where(Wallet.customer_id==user).get()
+	bal=user1.balance
+	if money>bal :
+		print("YOU'RE BROKE!! ")
+	else:
+		receiver_username=input("Enter the user name of the receiver--->")
+		receive_user=User.select().where(User.user_name==receiver_username).get()
+		user2=Wallet.select().where(Wallet.customer_id==receive_user).get()
+		bal1=user1.balance-money
+		bal2=user2.balance+money
+		query1 = Wallet.update(balance=bal1).where(Wallet.customer_id==user)
+		n1 = query1.execute()
+		query2 = Wallet.update(balance=bal2).where(Wallet.customer_id==receive_user)
+		n2 = query2.execute()
+
+
+
+
+
 
 
 	# user1=Wallet.select().where(Wallet.customer_id==user)
