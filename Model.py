@@ -11,15 +11,20 @@ class User(Model):
 
 class Wallet(Model):
 	customer_id = ForeignKeyField(User, backref='entries')
-	comments = TextField(default='')
-	timestamp = TimestampField()
 	balance= DoubleField(default=0)
-	transaction=DoubleField(default=0)
 
 	class Meta:
 		database = db
+class Transaction(Model):
+	customer_id = ForeignKeyField(User, backref='entries')
+	transaction_amount=DoubleField(default=0)
+	type_transaction=CharField(default="---")
+	timestamp=TimestampField()
+	comments=TextField(default="---")
 
+	class Meta:
+		database = db
 if __name__=='__main__':
 	
 	db.connect()
-	db.create_tables([User,Wallet])
+	db.create_tables([User,Wallet,Transaction])
